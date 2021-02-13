@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import ReactTooltip from "react-tooltip";
 
-function App() {
+import MapChart from "./MapChart";
+
+const App = () => {
+  const [content, setContent] = useState("");
+  const [listVisited, setListVisited] = useState({});
+
+  useEffect(() => {
+    const dataString = localStorage.getItem("listVisited");
+    const data = JSON.parse(dataString);
+
+    setListVisited(data);
+  }, []);
+
+  const onToggleItem = (index) => {
+    const listVisitedClone = { ...listVisited };
+    if (listVisitedClone[index]) {
+      listVisitedClone[index].visited = false;
+    } else {
+      listVisitedClone[index] = { visited: true };
+    }
+
+    setListVisited(listVisitedClone);
+    localStorage.setItem("listVisited", JSON.stringify(listVisitedClone));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <MapChart
+        setTooltipContent={setContent}
+        listVisited={listVisited}
+        onToggleItem={onToggleItem}
+      />
+      <ReactTooltip>{content}</ReactTooltip>
+    </>
   );
-}
+};
 
 export default App;
