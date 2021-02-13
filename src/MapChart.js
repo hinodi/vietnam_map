@@ -9,12 +9,13 @@ import {
 import { geoCentroid } from "d3-geo";
 
 import "./App.css";
-import vietnam from "./chartData/vietnam.json";
-import hoangsa from "./chartData/hoangsa.json";
-import truongsa from "./chartData/truongsa.json";
 import province from "./chartData/province.json";
 
-const chartData = [vietnam, hoangsa, truongsa];
+const chartData = [
+  "https://gist.githubusercontent.com/hinodi/611bfc7208232be11ee994bc4f07e625/raw/70029a9134b3a49a653d86ea812bbca5d391e0ee/vietnam_map.json",
+  "https://gist.githubusercontent.com/hinodi/611bfc7208232be11ee994bc4f07e625/raw/a6c87ab52e94d2bad690fb79a9e158b195bbc394/hoangsa_map.json",
+  "https://gist.githubusercontent.com/hinodi/611bfc7208232be11ee994bc4f07e625/raw/a6c87ab52e94d2bad690fb79a9e158b195bbc394/truongsa_map.json",
+];
 
 const MapChart = ({ setTooltipContent, listVisited, onToggleItem }) => {
   const getGeoBackgroundColor = (index) => {
