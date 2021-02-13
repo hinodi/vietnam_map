@@ -11,7 +11,7 @@ const App = () => {
     const dataString = localStorage.getItem("listVisited");
     const data = JSON.parse(dataString);
 
-    setListVisited(data);
+    if (data) setListVisited(data);
   }, []);
 
   const onToggleItem = (index) => {
